@@ -1,4 +1,4 @@
-const Developer = require('../models/Developer');
+import Developer from '../models/Developer';
 
 /**
  * Controlador dos dislikes que desenvolvedores dão um no outro na aplicação.
@@ -6,7 +6,7 @@ const Developer = require('../models/Developer');
  * @author: lucasmedeiros
  */
 
-module.exports = {
+export default {
   async store(req, res) {
     const { devId } = req.params;
     const { user } = req.headers;

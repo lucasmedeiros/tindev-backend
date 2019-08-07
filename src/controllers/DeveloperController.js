@@ -1,5 +1,5 @@
-const axios = require('axios');
-const Developer = require('../models/Developer');
+import axios from 'axios';
+import Developer from '../models/Developer';
 
 /**
  * Controlador dos desenvolvedores cadastrados no sistema.
@@ -7,7 +7,7 @@ const Developer = require('../models/Developer');
  * @author: lucasmedeiros
  */
 
-module.exports = {
+export default {
   /**
    * Retorna os usuários disponíveis para um usuário dar likes ou dislikes.
    * 

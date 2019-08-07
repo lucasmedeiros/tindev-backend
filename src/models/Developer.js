@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 /**
  * Modelo que representa um desenvolvedor cadastrado no banco de dados da
@@ -32,4 +32,4 @@ const DeveloperSchema = new Schema({
   timestamps: true,
 });
 
-module.exports = model("Developer", DeveloperSchema);
+export default model("Developer", DeveloperSchema);;

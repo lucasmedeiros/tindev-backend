@@ -1,7 +1,7 @@
-const express = require('express');
-const DeveloperController = require('./controllers/DeveloperController');
-const LikeController = require('./controllers/LikeController');
-const DislikeController = require('./controllers/DislikeController');
+import express from 'express';
+import DeveloperController from './controllers/DeveloperController';
+import LikeController from './controllers/LikeController';
+import DislikeController from './controllers/DislikeController';
 
 /**
  * Definição das rotas que serão utilizadas pelo servidor.
@@ -23,7 +23,6 @@ const getQueryResult = (query, defaultMessage) => {
 }
 
 // DEFINIÇÃO DAS ROTAS DE GET
-
 routes.get('/', (req, res) => {
   const message = `Hello, ${getQueryResult(req.query.name, 'World')}!`;
   return res.json({ message });
@@ -31,9 +30,8 @@ routes.get('/', (req, res) => {
 routes.get('/devs', DeveloperController.index);
 
 // DEFINIÇÃO DAS ROTAS DE POST
-
 routes.post('/devs', DeveloperController.store);
 routes.post('/devs/:devId/likes', LikeController.store);
 routes.post('/devs/:devId/dislikes', DislikeController.store);
 
-module.exports = routes;
+export default routes;
