@@ -23,9 +23,6 @@ const DislikeController = {
     if (!loggedDeveloper.dislikes.includes(targetDeveloper._id)) {
       loggedDeveloper.dislikes.push(targetDeveloper._id);
       await loggedDeveloper.save();
-
-      if (targetDeveloper.dislikes.includes(loggedDeveloper._id))
-        console.log("MATCH!");
     }
 
     return res.json(loggedDeveloper);
