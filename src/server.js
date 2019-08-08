@@ -5,7 +5,7 @@ import routes from './routes';
 import cors from 'cors';
 import config from './config';
 
-const { port } = config.host;
+const { baseUrl, port } = config.host;
 const { mongoDBUri } = config.mongoDB;
 
 const server = express(); // Inicia um servidor express
@@ -18,5 +18,5 @@ server.use(express.json()); // Diz que o servidor precisa reconhecer JSON.
 server.use(routes); // Aplica as rotas definidas em routes.js.
 
 server.listen({ port }, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server listening on ${baseUrl}:${port}`);
 }); // Roda o servidor no endereço especificado.

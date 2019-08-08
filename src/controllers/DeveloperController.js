@@ -1,13 +1,15 @@
 import axios from 'axios';
 import Developer from '../models/Developer';
 
+const GITHUB_API_USERS_URL = 'https://api.github.com/users/';
+
 /**
  * Controlador dos desenvolvedores cadastrados no sistema.
  * 
  * @author: lucasmedeiros
  */
 
-export default {
+const DeveloperController = {
   /**
    * Retorna os usuários disponíveis para um usuário dar likes ou dislikes.
    * 
@@ -40,17 +42,17 @@ export default {
   async store(req, res) {
     const { username: user } = req.body;
 
-    const userExists = await Developer.findOne({ user });
+    let developer = await Developer.findOne({ user });
 
-    if (userExists)
-      return res.json(userExists);
-
-    const response = await axios.get(`https://api.github.com/users/${user}`);
-
+    if (developer)
+      return res.json(developer);
+    
+    const githubUrl = GITHUB_API_USERS_URL + user;
+    const response = await axios.get(githubUrl);
     const { name, bio, avatar_url: avatar } = response.data;
 
-    const developer = await Developer.create({ 
-      name,
+    developer = await Developer.create({ 
+      name: name || user,
       user,
       bio,
       avatar,
@@ -59,3 +61,5 @@ export default {
     return res.json(developer);
   },
 };
+
+export default DeveloperController;
