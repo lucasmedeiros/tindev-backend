@@ -24,8 +24,16 @@ const LikeController = {
       loggedDeveloper.likes.push(targetDeveloper._id);
       await loggedDeveloper.save();
 
-      if (targetDeveloper.likes.includes(loggedDeveloper._id))
-        console.log("MATCH!");
+      if (targetDeveloper.likes.includes(loggedDeveloper._id)) {
+        const loggedSocket = req.connectedUsers[user];
+        const targetSocket = req.connectedUsers[devId];
+
+        if (loggedSocket)
+          req.socketServer.to(loggedSocket).emit('match', targetDeveloper);
+
+        if (targetSocket)
+          req.socketServer.to(targetSocket).emit('match', loggedDeveloper);
+      }
     }
 
     return res.json(loggedDeveloper);

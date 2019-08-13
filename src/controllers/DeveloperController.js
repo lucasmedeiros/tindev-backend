@@ -51,7 +51,7 @@ const DeveloperController = {
     const response = await axios.get(githubUrl);
     const { name, bio, avatar_url: avatar } = response.data;
 
-    developer = await Developer.create({ 
+    developer = await Developer.create({
       name: name || user,
       user,
       bio,
