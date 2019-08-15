@@ -2,6 +2,8 @@ import express from 'express';
 import DeveloperController from './controllers/DeveloperController';
 import LikeController from './controllers/LikeController';
 import DislikeController from './controllers/DislikeController';
+import { loginRequestHandler } from './auth/login';
+import { callbackRequestHandler } from './auth/callback';
 
 /**
  * Definição das rotas que serão utilizadas pelo servidor.
@@ -18,16 +20,18 @@ const routes = express.Router();
  * @param {String} defaultMessage mensagem que deve ser mostrada caso não tenha
  * sido passado nenhum argumento.
  */
-const getQueryResult = (query, defaultMessage) => {
+const getParametersResult = (query, defaultMessage) => {
   return query ? query : defaultMessage;
 }
 
 // DEFINIÇÃO DAS ROTAS DE GET
 routes.get('/', (req, res) => {
-  const message = `Hello, ${getQueryResult(req.query.name, 'World')}!`;
+  const message = `Hello, ${getParametersResult(req.query.name, 'World')}!`;
   return res.json({ message });
 });
 routes.get('/devs', DeveloperController.index);
+routes.get('/auth/login', loginRequestHandler);
+routes.get('/auth/callback', callbackRequestHandler);
 
 // DEFINIÇÃO DAS ROTAS DE POST
 routes.post('/devs', DeveloperController.store);

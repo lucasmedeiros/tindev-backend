@@ -10,7 +10,7 @@ import http from 'http';
 const { baseUrl, port } = config.host;
 const { mongoDBUri } = config.mongoDB;
 
-const httpServer = express(); // Inicia um servidor express
+const httpServer = express();
 const server = http.Server(httpServer);
 const socketServer = io(server);
 
