@@ -3,20 +3,29 @@ import config from '../config';
 import querystring from 'querystring';
 import request from 'request';
 
-const GITHUB_BASE_AUTH_URL = 'https://github.com/login/oauth/authorize';
+const GITHUB_BASE_AUTH_URL = 'https://github.com/login/oauth';
 
 const requestAccessToken = (req, res) => {
-  res.clearCookie('github-auth-state');
+  // res.clearCookie('github-auth-state');
   const { code } = req.query;
+
+  if (!code) {
+    return res.send({
+      success: false,
+      message: 'Error: no code returned from Github',
+    });
+  }
+
+  const { callbackUrl, oauthAppClientId, oauthAppClientSecret } = config.github;
 
   const requestOptions = {
     url: `${GITHUB_BASE_AUTH_URL}/access_token`,
     json: true,
     form: {
       code,
-      redirect_uri: config.github.callbackUrl,
-      client_id: config.github.outhAppClientId,
-      clent_secret: config.github.outhAppClientSecret,
+      redirect_uri: callbackUrl,
+      client_id: oauthAppClientId,
+      client_secret: oauthAppClientSecret,
     },
   };
 
@@ -38,13 +47,13 @@ const requestAccessToken = (req, res) => {
 };
 
 export const callbackRequestHandler = (req, res) => {
-  const storedState = req.cookies ? req.cookies['github-auth-state'] : null;
+  // const storedState = req.cookies ? req.cookies['github-auth-state'] : null;
   const { state } = req.query;
 
-  console.log('stored_state', storedState);
-  console.log('state', state);
+  // console.log('stored_state', storedState);
+  // console.log('state', state);
 
-  if (state && storedState)
+  if (state)
     requestAccessToken(req, res);
   else {
     const query = querystring.stringify({
