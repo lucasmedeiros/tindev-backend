@@ -6,7 +6,6 @@ import request from 'request';
 const GITHUB_BASE_AUTH_URL = 'https://github.com/login/oauth';
 
 const requestAccessToken = (req, res) => {
-  // res.clearCookie('github-auth-state');
   const { code } = req.query;
 
   if (!code) {
@@ -48,11 +47,7 @@ const requestAccessToken = (req, res) => {
 };
 
 export const callbackRequestHandler = (req, res) => {
-  // const storedState = req.cookies ? req.cookies['github-auth-state'] : null;
   const { state } = req.query;
-
-  // console.log('stored_state', storedState);
-  // console.log('state', state);
 
   if (state)
     requestAccessToken(req, res);
