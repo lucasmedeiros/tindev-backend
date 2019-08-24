@@ -12,7 +12,7 @@ const requestAccessToken = (req, res) => {
   if (!code) {
     return res.send({
       success: false,
-      message: 'Error: no code returned from Github',
+      message: 'Error: no code returned from Github.',
     });
   }
 
@@ -34,7 +34,8 @@ const requestAccessToken = (req, res) => {
 
     if (!error && response.statusCode === 200) {
       const { access_token: accessToken } = body;
-      url = `http://localhost:3000/${accessToken}`;
+      const { successPath } = config.client;
+      url = `${successPath}/${accessToken}`;
     } else {
       const query = querystring.stringify({
         error: 'invalid token',

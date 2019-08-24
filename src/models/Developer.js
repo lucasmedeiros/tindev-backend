@@ -32,4 +32,4 @@ const DeveloperSchema = new Schema({
   timestamps: true,
 });
 
-export default model("Developer", DeveloperSchema);;
+export default model("Developer", DeveloperSchema);
