@@ -40,7 +40,7 @@ const requestAccessToken = (req, res) => {
         error: 'invalid_token',
       });
       const {errorPath} = config.client;
-      url = `${errorPath}/${query}`;
+      url = `${errorPath}?${query}`;
     }
 
     res.redirect(url);
@@ -57,7 +57,7 @@ export const callbackRequestHandler = (req, res) => {
       error: 'state_mismatch',
     });
     const {errorPath} = config.client;
-    const url = `${errorPath}/${query}`;
+    const url = `${errorPath}?${query}`;
     res.redirect(url);
   }
 };
