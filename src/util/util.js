@@ -4,6 +4,7 @@ const DEFAULT_LENGTH_SIZE = 16;
  * Gera uma string aleatória a partir do tamanho.
  * 
  * @param {Number} length - tamanho da string aleatória que será gerada
+ * @returns {String} - string aleatória de tamanho variado.
  */
 export const generateRandomString = (length = DEFAULT_LENGTH_SIZE) => {
   let string = '';

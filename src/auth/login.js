@@ -8,7 +8,6 @@ const GITHUB_AUTHORIZE_URL = 'https://github.com/login/oauth/authorize';
 
 export const loginRequestHandler = (_req, res) => {
   const state = generateRandomString(16);
-  // res.cookie('github-auth-state', state);
 
   const query = querystring.stringify({
     client_id: oauthAppClientId,

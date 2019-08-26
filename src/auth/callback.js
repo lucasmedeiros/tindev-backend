@@ -37,9 +37,10 @@ const requestAccessToken = (req, res) => {
       url = `${successPath}/${accessToken}`;
     } else {
       const query = querystring.stringify({
-        error: 'invalid token',
+        error: 'invalid_token',
       });
-      url = 'http://localhost:3000/error';
+      const {errorPath} = config.client;
+      url = `${errorPath}/${query}`;
     }
 
     res.redirect(url);
@@ -55,7 +56,8 @@ export const callbackRequestHandler = (req, res) => {
     const query = querystring.stringify({
       error: 'state_mismatch',
     });
-    const url = 'http://localhost:3000/errofeio';
+    const {errorPath} = config.client;
+    const url = `${errorPath}/${query}`;
     res.redirect(url);
   }
 };
