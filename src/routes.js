@@ -4,6 +4,7 @@ import LikeController from './controllers/LikeController';
 import DislikeController from './controllers/DislikeController';
 import { loginRequestHandler } from './auth/login';
 import { callbackRequestHandler } from './auth/callback';
+import MatchController from './controllers/MatchController';
 
 /**
  * Definição das rotas que serão utilizadas pelo servidor.
@@ -29,6 +30,7 @@ routes.get('/', (req, res) => {
   const message = `Hello, ${getParametersResult(req.query.name, 'World')}!`;
   return res.json({ message });
 });
+routes.get('/devs/:devId/matches', MatchController.index);
 routes.get('/dev', DeveloperController.get);
 routes.get('/devs', DeveloperController.index);
 routes.get('/auth/login', loginRequestHandler);

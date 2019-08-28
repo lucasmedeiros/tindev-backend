@@ -17,7 +17,6 @@ const DeveloperController = {
    */
   async get(req, res) {
     const { user } = req.headers;
-
     try {
       const loggedDev = await Developer.findById(user);
       
