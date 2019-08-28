@@ -19,8 +19,8 @@ yarn dev
 
 ### Rodar em modo de produção:
 
-Você deve executar os seguintes comandos:
+Você deve executar o comando:
 ```sh
-yarn build
-node /build/server.js
+yarn start
 ```
+Para buildar e rodar em modo produção.

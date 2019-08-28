@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
-    "build": "babel -d ./build ./src"
+    "start": "babel -d ./build ./src && node build/server.js"
   },
   "dependencies": {
     "axios": "^0.19.0",
