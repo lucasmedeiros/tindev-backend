@@ -22,11 +22,13 @@ const LikeController = {
 
     if (!loggedDeveloper.likes.includes(targetDeveloper._id)) {
       loggedDeveloper.likes.push(targetDeveloper._id);
-      await loggedDeveloper.save();
 
       if (targetDeveloper.likes.includes(loggedDeveloper._id)) {
         const loggedSocket = req.connectedUsers[user];
         const targetSocket = req.connectedUsers[devId];
+
+        loggedDeveloper.matches.push(targetDeveloper._id);
+        targetDeveloper.matches.push(loggedDeveloper._id);
 
         if (loggedSocket)
           req.socketServer.to(loggedSocket).emit('match', targetDeveloper);
@@ -34,6 +36,8 @@ const LikeController = {
         if (targetSocket)
           req.socketServer.to(targetSocket).emit('match', loggedDeveloper);
       }
+      await loggedDeveloper.save();
+      await targetDeveloper.save();
     }
 
     return res.json(loggedDeveloper);
