@@ -29,6 +29,7 @@ routes.get('/', (req, res) => {
   const message = `Hello, ${getParametersResult(req.query.name, 'World')}!`;
   return res.json({ message });
 });
+routes.get('/dev', DeveloperController.get);
 routes.get('/devs', DeveloperController.index);
 routes.get('/auth/login', loginRequestHandler);
 routes.get('/auth/callback', callbackRequestHandler);

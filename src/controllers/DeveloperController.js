@@ -10,6 +10,32 @@ const GITHUB_API_USER_URL = 'https://api.github.com/user';
 
 const DeveloperController = {
   /**
+   * Retorna um usuário específico, a partir de seu ID.
+   * 
+   * @param {Request} req 
+   * @param {Response} res 
+   */
+  async get(req, res) {
+    const { user } = req.headers;
+
+    try {
+      const loggedDev = await Developer.findById(user);
+      
+      if (!loggedDev)
+        return res.status(404).json({
+          success: false,
+          message: 'Usuário não encontrado!',
+        });
+      
+      return res.status(200).json(loggedDev);
+    } catch (err) {
+      return res.status(400).json({
+        success: false,
+        message: 'ID informado inválido!',
+      });
+    }
+  },
+  /**
    * Retorna os usuários disponíveis para um usuário dar likes ou dislikes.
    * 
    * @param {Request} req 
